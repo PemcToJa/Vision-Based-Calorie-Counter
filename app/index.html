@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition AI</title>
+    <link rel="stylesheet" href="/static/style.css?v=2">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="logo">
+                <i data-lucide="leaf"></i>
+                <span>Nutrition<b>AI</b></span>
+            </div>
+            <div class="status-badge">System Ready</div>
+        </header>
+
+        <main class="content-grid">
+            <section class="panel upload-panel">
+
+                <div class="model-toggle" style="pointer-events: none;">
+                    <input type="radio" id="m-fusion" name="model_type" value="fusion" checked>
+                    <label for="m-fusion" style="width: 100%; display: flex; justify-content: center; gap: 10px;">
+                        <i data-lucide="layers-2"></i> RGB Analysis + Depth Auto-Mapping (MiDaS)
+                    </label>
+
+                    <div class="slider" style="width: 98.5%; justify-content: center;"></div>
+                </div>
+
+                <div class="dropzone-container" id="dropzones">
+                    <div class="zone-wrapper" id="rgb-wrapper">
+                        <span class="zone-label">RGB image</span>
+                        <div class="zone" id="zone-rgb">
+                            <input type="file" id="input-rgb" accept="image/*">
+                            <div class="zone-content">
+                                <i data-lucide="upload-cloud"></i>
+                                <p>Select a photo</p>
+                            </div>
+                            <img id="prev-rgb" class="preview">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btn-analyze" class="primary-btn" disabled>
+                    <span id="loader" class="hidden"></span>
+                    <i data-lucide="sparkles"></i>
+                    <span id="btn-text">Analyze the meal</span>
+                </button>
+            </section>
+
+            <section class="panel results-panel">
+                <div class="results-header">
+                    <div class="kcal-display">
+                        <span class="label">Calories</span>
+                        <div class="value-row">
+                            <h1 id="res-kcal">—</h1>
+                            <small>kcal</small>
+                        </div>
+                    </div>
+
+                    <div class="donut-container">
+                        <svg viewBox="0 0 36 36" class="donut">
+                            <circle class="ring" cx="18" cy="18" r="15.9"></circle>
+                            <circle id="d-fat" class="seg fat" cx="18" cy="18" r="15.9"></circle>
+                            <circle id="d-carb" class="seg carb" cx="18" cy="18" r="15.9"></circle>
+                            <circle id="d-prot" class="seg prot" cx="18" cy="18" r="15.9"></circle>
+                        </svg>
+                        <div class="donut-label">MACRO</div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div id="empty-state" class="empty-state">
+                    <i data-lucide="utensils"></i>
+                    <p>Upload the data to view the analysis</p>
+                </div>
+
+                <div id="stats-grid" class="stats-grid hidden">
+                    <div class="stat-card prot">
+                        <span class="s-label">Protein</span>
+                        <h3 id="res-prot">0</h3>
+                        <span class="s-unit">grams</span>
+                    </div>
+                    <div class="stat-card carb">
+                        <span class="s-label">Carbohydrates</span>
+                        <h3 id="res-carb">0</h3>
+                        <span class="s-unit">grams</span>
+                    </div>
+                    <div class="stat-card fat">
+                        <span class="s-label">Fat</span>
+                        <h3 id="res-fat">0</h3>
+                        <span class="s-unit">grams</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="/static/script.js?v=1"></script>
+</body>
+</html>
