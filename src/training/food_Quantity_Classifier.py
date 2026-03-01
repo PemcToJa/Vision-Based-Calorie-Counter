@@ -24,8 +24,10 @@ class FoodMassFusion(nn.Module):
             nn.Linear(in_features, 101)
         )
 
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
         self.food_classifier_backbone.load_state_dict(
-            torch.load(classifier_path, map_location="cuda")
+            torch.load(classifier_path, map_location=device, weights_only=True)
         )
 
         self.food_classifier_backbone.classifier = nn.Identity()
